@@ -81,6 +81,27 @@ For the backend API, you can deploy to platforms like:
 - Railway
 - Vercel (with serverless functions)
 
+### Render Deployment
+
+1. Go to https://render.com and create an account
+2. Click on "New Web Service"
+3. Connect your GitHub account and select this repository
+4. Configure with these settings:
+   - Name: smart-shopping-hub-api
+   - Root Directory: server
+   - Environment: Node
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+5. Add environment variables:
+   - NODE_ENV: production
+   - PORT: 10000
+6. Click "Create Web Service" to deploy
+
+After deployment, update your frontend `.env.production` file with your Render service URL:
+```env
+VITE_API_URL=https://your-render-service-name.onrender.com
+```
+
 ## Environment Variables
 
 ### Client (.env)
