@@ -195,6 +195,127 @@ const mockProducts = {
       source: "Flipkart",
       link: "https://flipkart.com/head-shoulders-shampoo"
     }
+  ],
+  // Additional popular products
+  'mobile': [
+    {
+      name: "iPhone 15",
+      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop",
+      price: "₹74,999",
+      rating: 4.5,
+      reviews: "12,340",
+      source: "Amazon",
+      link: "https://amazon.in/iphone-15"
+    },
+    {
+      name: "Samsung Galaxy S24",
+      image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop",
+      price: "₹71,999",
+      rating: 4.2,
+      reviews: "7,543",
+      source: "Flipkart",
+      link: "https://flipkart.com/samsung-s24"
+    }
+  ],
+  'phone': [
+    {
+      name: "iPhone 15",
+      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop",
+      price: "₹74,999",
+      rating: 4.5,
+      reviews: "12,340",
+      source: "Amazon",
+      link: "https://amazon.in/iphone-15"
+    },
+    {
+      name: "OnePlus 11",
+      image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop",
+      price: "₹56,999",
+      rating: 4.3,
+      reviews: "6,789",
+      source: "Flipkart",
+      link: "https://flipkart.com/oneplus-11"
+    }
+  ],
+  'headphones': [
+    {
+      name: "Sony WH-1000XM5",
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop",
+      price: "₹29,990",
+      rating: 4.6,
+      reviews: "8,234",
+      source: "Amazon",
+      link: "https://amazon.in/sony-wh1000xm5"
+    },
+    {
+      name: "JBL Tune 760NC",
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop",
+      price: "₹4,999",
+      rating: 4.2,
+      reviews: "3,456",
+      source: "Flipkart",
+      link: "https://flipkart.com/jbl-tune-760nc"
+    }
+  ],
+  'watch': [
+    {
+      name: "Apple Watch Series 9",
+      image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300&h=300&fit=crop",
+      price: "₹41,900",
+      rating: 4.7,
+      reviews: "12,345",
+      source: "Amazon",
+      link: "https://amazon.in/apple-watch-series-9"
+    },
+    {
+      name: "Samsung Galaxy Watch 6",
+      image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300&h=300&fit=crop",
+      price: "₹29,999",
+      rating: 4.4,
+      reviews: "8,976",
+      source: "Flipkart",
+      link: "https://flipkart.com/samsung-galaxy-watch-6"
+    }
+  ],
+  'tv': [
+    {
+      name: "Samsung 55\" 4K Smart TV",
+      image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=300&h=300&fit=crop",
+      price: "₹54,999",
+      rating: 4.3,
+      reviews: "7,654",
+      source: "Amazon",
+      link: "https://amazon.in/samsung-55-4k-tv"
+    },
+    {
+      name: "LG 55\" OLED TV",
+      image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=300&h=300&fit=crop",
+      price: "₹89,999",
+      rating: 4.6,
+      reviews: "5,432",
+      source: "Flipkart",
+      link: "https://flipkart.com/lg-55-oled-tv"
+    }
+  ],
+  'nike shoes': [
+    {
+      name: "Nike Air Force 1",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+      price: "₹7,495",
+      rating: 4.5,
+      reviews: "12,456",
+      source: "Amazon",
+      link: "https://amazon.in/nike-air-force-1"
+    },
+    {
+      name: "Nike Revolution 6",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+      price: "₹3,495",
+      rating: 4.3,
+      reviews: "8,765",
+      source: "Flipkart",
+      link: "https://flipkart.com/nike-revolution-6"
+    }
   ]
 };
 
@@ -316,11 +437,34 @@ app.get('/api/search', (req, res) => {
     const searchKey = query.toLowerCase().trim();
     let results = [];
     
-    // Priority 1: Check for exact matches first
+    // Priority 1: Check for exact matches first (most important)
     for (const [key, products] of Object.entries(mockProducts)) {
-      if (searchKey === key || searchKey.includes(key) || key.includes(searchKey)) {
+      if (searchKey === key) {
         results = [...products];
         break;
+      }
+    }
+    
+    // Priority 2: Check for contains matches
+    if (results.length === 0) {
+      for (const [key, products] of Object.entries(mockProducts)) {
+        if (key.includes(searchKey) || searchKey.includes(key)) {
+          results = [...products];
+          break;
+        }
+      }
+    }
+    
+    // Priority 3: Check for word matches
+    if (results.length === 0) {
+      for (const [key, products] of Object.entries(mockProducts)) {
+        const keyWords = key.split(' ');
+        const searchWords = searchKey.split(' ');
+        if (keyWords.some(word => searchWords.includes(word)) || 
+            searchWords.some(word => keyWords.includes(word))) {
+          results = [...products];
+          break;
+        }
       }
     }
     
