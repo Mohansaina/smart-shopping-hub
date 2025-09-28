@@ -539,7 +539,7 @@ const generateProductResults = (query) => {
           rating: (4.2 + Math.random() * 0.8).toFixed(1),
           reviews: `${Math.floor(Math.random() * 15000) + 5000}`,
           source: "Amazon",
-          link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+          link: `https://www.amazon.in/s?k=${encodeURIComponent(query)}`
         },
         {
           name: `${brand.charAt(0).toUpperCase() + brand.slice(1)} ${query.replace(new RegExp(brand, 'gi'), '').trim() || 'Product'} - Standard`,
@@ -548,7 +548,7 @@ const generateProductResults = (query) => {
           rating: (3.9 + Math.random() * 0.8).toFixed(1),
           reviews: `${Math.floor(Math.random() * 12000) + 3000}`,
           source: "Flipkart",
-          link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
+          link: `https://www.flipkart.com/search?q=${encodeURIComponent(query)}`
         },
         {
           name: `${brand.charAt(0).toUpperCase() + brand.slice(1)} ${query.replace(new RegExp(brand, 'gi'), '').trim() || 'Product'} - Budget`,
@@ -557,7 +557,7 @@ const generateProductResults = (query) => {
           rating: (3.6 + Math.random() * 0.8).toFixed(1),
           reviews: `${Math.floor(Math.random() * 8000) + 2000}`,
           source: "Amazon",
-          link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+          link: `https://www.amazon.in/s?k=${encodeURIComponent(query)}`
         }
       ];
     }
