@@ -270,45 +270,36 @@ const mockProducts = {
     }
   ],
   // Additional popular products
-  'mobile': [
-    {
-      name: "iPhone 15",
-      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop",
-      price: "₹74,999",
-      rating: 4.5,
-      reviews: "12,340",
-      source: "Amazon",
-      link: "https://amazon.in/iphone-15"
-    },
-    {
-      name: "Samsung Galaxy S24",
-      image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop",
-      price: "₹71,999",
-      rating: 4.2,
-      reviews: "7,543",
-      source: "Flipkart",
-      link: "https://flipkart.com/samsung-s24"
-    }
-  ],
   'phone': [
-    {
-      name: "iPhone 15",
-      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop",
-      price: "₹74,999",
-      rating: 4.5,
-      reviews: "12,340",
-      source: "Amazon",
-      link: "https://amazon.in/iphone-15"
-    },
-    {
-      name: "OnePlus 11",
-      image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop",
-      price: "₹56,999",
-      rating: 4.3,
-      reviews: "6,789",
-      source: "Flipkart",
-      link: "https://flipkart.com/oneplus-11"
-    }
+    { name: "iPhone 15", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹74,999", rating: 4.5, reviews: "12,340", source: "Amazon", link: "https://amazon.in/iphone-15" },
+    { name: "Samsung Galaxy S24", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹71,999", rating: 4.2, reviews: "7,543", source: "Flipkart", link: "https://flipkart.com/samsung-s24" },
+    { name: "OnePlus 12 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹62,999", rating: 4.3, reviews: "4,876", source: "Amazon", link: "https://amazon.in/oneplus-12" },
+    { name: "Xiaomi 14 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.1, reviews: "5,432", source: "Flipkart", link: "https://flipkart.com/xiaomi-14" }
+  ],
+  'mobile': [
+    { name: "iPhone 15", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹74,999", rating: 4.5, reviews: "12,340", source: "Amazon", link: "https://amazon.in/iphone-15" },
+    { name: "Samsung Galaxy S24", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹71,999", rating: 4.2, reviews: "7,543", source: "Flipkart", link: "https://flipkart.com/samsung-s24" },
+    { name: "OnePlus 12 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹62,999", rating: 4.3, reviews: "4,876", source: "Amazon", link: "https://amazon.in/oneplus-12" },
+    { name: "Xiaomi 14 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.1, reviews: "5,432", source: "Flipkart", link: "https://flipkart.com/xiaomi-14" }
+  ],
+  'smartphone': [
+    { name: "iPhone 15 Pro", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹1,34,900", rating: 4.6, reviews: "5,234", source: "Amazon", link: "https://amazon.in/iphone-15-pro" },
+    { name: "Samsung Galaxy S24 Ultra", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹1,29,999", rating: 4.4, reviews: "3,876", source: "Flipkart", link: "https://flipkart.com/samsung-s24-ultra" },
+    { name: "iPhone 14", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹63,999", rating: 4.3, reviews: "15,432", source: "Amazon", link: "https://amazon.in/iphone-14" },
+    { name: "OnePlus 11 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.2, reviews: "7,432", source: "Flipkart", link: "https://flipkart.com/oneplus-11" }
+  ],
+  // Additional phone variants for comprehensive search
+  'mobile phone': [
+    { name: "iPhone 13", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹53,999", rating: 4.2, reviews: "22,543", source: "Amazon", link: "https://amazon.in/iphone-13" },
+    { name: "Samsung Galaxy A54", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹35,999", rating: 4.1, reviews: "8,765", source: "Flipkart", link: "https://flipkart.com/samsung-a54" },
+    { name: "Redmi Note 13 Pro", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹23,999", rating: 4.0, reviews: "10,876", source: "Amazon", link: "https://amazon.in/redmi-note-13" },
+    { name: "OPPO F25 Pro 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹22,999", rating: 3.9, reviews: "2,876", source: "Flipkart", link: "https://flipkart.com/oppo-f25" }
+  ],
+  'phones': [
+    { name: "Vivo V30 Pro", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹40,999", rating: 4.0, reviews: "3,876", source: "Amazon", link: "https://amazon.in/vivo-v30" },
+    { name: "Realme 12 Pro+", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹28,999", rating: 3.9, reviews: "4,765", source: "Flipkart", link: "https://flipkart.com/realme-12" },
+    { name: "Google Pixel 8", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹75,999", rating: 4.4, reviews: "1,234", source: "Amazon", link: "https://amazon.in/pixel-8" },
+    { name: "Nothing Phone 2", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹44,999", rating: 4.2, reviews: "987", source: "Flipkart", link: "https://flipkart.com/nothing-phone-2" }
   ],
   'headphones': [
     {
