@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const MASSIVE_PRODUCT_CATALOG = require('./massive-catalog');
+const comprehensiveCatalog = require('./comprehensive-catalog');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Enhanced product database with EVERYTHING from Flipkart & Amazon
 const mockProducts = {
-  ...MASSIVE_PRODUCT_CATALOG,
+  ...comprehensiveCatalog,
   // Add even more comprehensive categories
   
   // BOOKS & STATIONERY (1000+ items)
@@ -93,7 +93,7 @@ const mockProducts = {
       rating: 4.5,
       reviews: "12,340",
       source: "Amazon",
-      link: "https://amazon.in/iphone-15"
+      link: "https://www.amazon.in/s?k=iphone+15"
     },
     {
       name: "iPhone 15",
@@ -102,7 +102,7 @@ const mockProducts = {
       rating: 4.4,
       reviews: "8,567",
       source: "Flipkart",
-      link: "https://flipkart.com/iphone-15"
+      link: "https://www.flipkart.com/search?q=iphone+15"
     }
   ],
   'samsung galaxy s24': [
@@ -113,7 +113,7 @@ const mockProducts = {
       rating: 4.3,
       reviews: "9,876",
       source: "Amazon",
-      link: "https://amazon.in/samsung-s24"
+      link: "https://www.amazon.in/s?k=samsung+galaxy+s24"
     },
     {
       name: "Samsung Galaxy S24",
@@ -122,7 +122,7 @@ const mockProducts = {
       rating: 4.2,
       reviews: "7,543",
       source: "Flipkart",
-      link: "https://flipkart.com/samsung-s24"
+      link: "https://www.flipkart.com/search?q=samsung+galaxy+s24"
     }
   ],
   'laptop': [
@@ -133,7 +133,7 @@ const mockProducts = {
       rating: 4.7,
       reviews: "15,432",
       source: "Amazon",
-      link: "https://amazon.in/macbook-air-m2"
+      link: "https://www.amazon.in/s?k=macbook+air+m2"
     },
     {
       name: "Dell XPS 13",
@@ -142,7 +142,7 @@ const mockProducts = {
       rating: 4.4,
       reviews: "8,765",
       source: "Flipkart",
-      link: "https://flipkart.com/dell-xps-13"
+      link: "https://www.flipkart.com/search?q=dell+xps+13"
     }
   ],
   // Fashion & Clothing
@@ -154,7 +154,7 @@ const mockProducts = {
       rating: 4.1,
       reviews: "3,456",
       source: "Amazon",
-      link: "https://amazon.in/mens-tshirt"
+      link: "https://www.amazon.in/s?k=mens+cotton+tshirt"
     },
     {
       name: "Women's Graphic T-Shirt",
@@ -163,7 +163,7 @@ const mockProducts = {
       rating: 4.2,
       reviews: "2,789",
       source: "Flipkart",
-      link: "https://flipkart.com/womens-tshirt"
+      link: "https://www.flipkart.com/search?q=womens+graphic+tshirt"
     }
   ],
   'shoes': [
@@ -174,7 +174,7 @@ const mockProducts = {
       rating: 4.3,
       reviews: "5,432",
       source: "Amazon",
-      link: "https://amazon.in/nike-air-max-270"
+      link: "https://www.amazon.in/s?k=nike+air+max+270"
     },
     {
       name: "Adidas Ultraboost 22",
@@ -183,7 +183,7 @@ const mockProducts = {
       rating: 4.4,
       reviews: "4,567",
       source: "Flipkart",
-      link: "https://flipkart.com/adidas-ultraboost"
+      link: "https://www.flipkart.com/search?q=adidas+ultraboost+22"
     }
   ],
   'bata shoes': [
@@ -194,7 +194,7 @@ const mockProducts = {
       rating: 4.1,
       reviews: "8,234",
       source: "Amazon",
-      link: "https://amazon.in/bata-formal-shoes"
+      link: "https://www.amazon.in/s?k=bata+men+formal+shoes"
     },
     {
       name: "Bata Women's Casual Shoes",
@@ -203,7 +203,7 @@ const mockProducts = {
       rating: 4.0,
       reviews: "6,789",
       source: "Flipkart",
-      link: "https://flipkart.com/bata-casual-shoes"
+      link: "https://www.flipkart.com/search?q=bata+women+casual+shoes"
     }
   ],
   // Home & Kitchen
@@ -215,7 +215,7 @@ const mockProducts = {
       rating: 4.3,
       reviews: "2,345",
       source: "Amazon",
-      link: "https://amazon.in/panasonic-rice-cooker"
+      link: "https://www.amazon.in/s?k=panasonic+1.8l+rice+cooker"
     },
     {
       name: "Prestige Electric Rice Cooker",
@@ -224,7 +224,7 @@ const mockProducts = {
       rating: 4.1,
       reviews: "1,876",
       source: "Flipkart",
-      link: "https://flipkart.com/prestige-rice-cooker"
+      link: "https://www.flipkart.com/search?q=prestige+electric+rice+cooker"
     }
   ],
   // Groceries
@@ -236,7 +236,7 @@ const mockProducts = {
       rating: 4.4,
       reviews: "6,789",
       source: "Amazon",
-      link: "https://amazon.in/basmati-rice"
+      link: "https://www.amazon.in/s?k=basmati+rice+5kg"
     },
     {
       name: "Sona Masoori Rice 10kg",
@@ -245,7 +245,7 @@ const mockProducts = {
       rating: 4.2,
       reviews: "5,432",
       source: "Flipkart",
-      link: "https://flipkart.com/sona-masoori-rice"
+      link: "https://www.flipkart.com/search?q=sona+masoori+rice+10kg"
     }
   ],
   // Beauty & Personal Care
@@ -257,7 +257,7 @@ const mockProducts = {
       rating: 4.2,
       reviews: "5,432",
       source: "Amazon",
-      link: "https://amazon.in/loreal-shampoo"
+      link: "https://www.amazon.in/s?k=loreal+paris+shampoo"
     },
     {
       name: "Head & Shoulders Shampoo",
@@ -266,40 +266,96 @@ const mockProducts = {
       rating: 4.0,
       reviews: "3,789",
       source: "Flipkart",
-      link: "https://flipkart.com/head-shoulders-shampoo"
+      link: "https://www.flipkart.com/search?q=head+shoulders+shampoo"
     }
   ],
   // Additional popular products
   'phone': [
-    { name: "iPhone 15", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹74,999", rating: 4.5, reviews: "12,340", source: "Amazon", link: "https://amazon.in/iphone-15" },
-    { name: "Samsung Galaxy S24", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹71,999", rating: 4.2, reviews: "7,543", source: "Flipkart", link: "https://flipkart.com/samsung-s24" },
-    { name: "OnePlus 12 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹62,999", rating: 4.3, reviews: "4,876", source: "Amazon", link: "https://amazon.in/oneplus-12" },
-    { name: "Xiaomi 14 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.1, reviews: "5,432", source: "Flipkart", link: "https://flipkart.com/xiaomi-14" }
+    { name: "iPhone 15", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹74,999", rating: 4.5, reviews: "12,340", source: "Amazon", link: "https://www.amazon.in/s?k=iphone+15" },
+    { name: "Samsung Galaxy S24", image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&h=300&fit=crop", price: "₹71,999", rating: 4.2, reviews: "7,543", source: "Flipkart", link: "https://www.flipkart.com/search?q=samsung+galaxy+s24" },
+    { name: "OnePlus 12 5G", image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=300&fit=crop", price: "₹62,999", rating: 4.3, reviews: "4,876", source: "Amazon", link: "https://www.amazon.in/s?k=oneplus+12" },
+    { name: "Xiaomi 14 5G", image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.1, reviews: "5,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=xiaomi+14" }
+  ],
+  
+  // POCO PHONES
+  'poco phone': [
+    { name: "POCO X6 Pro 5G", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=300&fit=crop", price: "₹24,999", rating: 4.3, reviews: "8,765", source: "Amazon", link: "https://www.amazon.in/s?k=poco+x6+pro" },
+    { name: "POCO F6 5G", image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=300&fit=crop", price: "₹28,999", rating: 4.4, reviews: "6,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=poco+f6" },
+    { name: "POCO M6 Pro 5G", image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=300&h=300&fit=crop", price: "₹12,999", rating: 4.1, reviews: "9,876", source: "Amazon", link: "https://www.amazon.in/s?k=poco+m6+pro" },
+    { name: "POCO C65", image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=300&h=300&fit=crop", price: "₹8,999", rating: 4.0, reviews: "5,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=poco+c65" }
+  ],
+  'poco': [
+    { name: "POCO X6 Pro 5G", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=300&fit=crop", price: "₹24,999", rating: 4.3, reviews: "8,765", source: "Amazon", link: "https://www.amazon.in/s?k=poco+x6+pro" },
+    { name: "POCO F6 5G", image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=300&fit=crop", price: "₹28,999", rating: 4.4, reviews: "6,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=poco+f6" },
+    { name: "POCO M6 Pro 5G", image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=300&h=300&fit=crop", price: "₹12,999", rating: 4.1, reviews: "9,876", source: "Amazon", link: "https://www.amazon.in/s?k=poco+m6+pro" },
+    { name: "POCO C65", image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=300&h=300&fit=crop", price: "₹8,999", rating: 4.0, reviews: "5,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=poco+c65" }
+  ],
+  
+  // REALME PHONES
+  'realme phone': [
+    { name: "Realme 12 Pro+", image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=300&h=300&fit=crop", price: "₹29,999", rating: 4.3, reviews: "7,654", source: "Amazon", link: "https://www.amazon.in/s?k=realme+12+pro" },
+    { name: "Realme GT 6T", image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=300&h=300&fit=crop", price: "₹32,999", rating: 4.4, reviews: "5,876", source: "Flipkart", link: "https://www.flipkart.com/search?q=realme+gt+6t" },
+    { name: "Realme Narzo 70 Pro", image: "https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=300&h=300&fit=crop", price: "₹19,999", rating: 4.2, reviews: "8,432", source: "Amazon", link: "https://www.amazon.in/s?k=realme+narzo+70" },
+    { name: "Realme C67", image: "https://images.unsplash.com/photo-1607936854279-55e8f4bc233c?w=300&h=300&fit=crop", price: "₹13,999", rating: 4.0, reviews: "6,789", source: "Flipkart", link: "https://www.flipkart.com/search?q=realme+c67" }
+  ],
+  'realme': [
+    { name: "Realme 12 Pro+", image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=300&h=300&fit=crop", price: "₹29,999", rating: 4.3, reviews: "7,654", source: "Amazon", link: "https://www.amazon.in/s?k=realme+12+pro" },
+    { name: "Realme GT 6T", image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=300&h=300&fit=crop", price: "₹32,999", rating: 4.4, reviews: "5,876", source: "Flipkart", link: "https://www.flipkart.com/search?q=realme+gt+6t" },
+    { name: "Realme Narzo 70 Pro", image: "https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=300&h=300&fit=crop", price: "₹19,999", rating: 4.2, reviews: "8,432", source: "Amazon", link: "https://www.amazon.in/s?k=realme+narzo+70" },
+    { name: "Realme C67", image: "https://images.unsplash.com/photo-1607936854279-55e8f4bc233c?w=300&h=300&fit=crop", price: "₹13,999", rating: 4.0, reviews: "6,789", source: "Flipkart", link: "https://www.flipkart.com/search?q=realme+c67" }
+  ],
+  
+  // VIVO PHONES
+  'vivo phone': [
+    { name: "Vivo V30 Pro", image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=300&h=300&fit=crop", price: "₹41,999", rating: 4.3, reviews: "6,543", source: "Amazon", link: "https://www.amazon.in/s?k=vivo+v30+pro" },
+    { name: "Vivo X100", image: "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?w=300&h=300&fit=crop", price: "₹63,999", rating: 4.5, reviews: "4,321", source: "Flipkart", link: "https://www.flipkart.com/search?q=vivo+x100" },
+    { name: "Vivo T3 5G", image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=300&h=300&fit=crop", price: "₹18,999", rating: 4.1, reviews: "7,654", source: "Amazon", link: "https://www.amazon.in/s?k=vivo+t3" },
+    { name: "Vivo Y28", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop", price: "₹13,999", rating: 3.9, reviews: "5,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=vivo+y28" }
+  ],
+  'vivo': [
+    { name: "Vivo V30 Pro", image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=300&h=300&fit=crop", price: "₹41,999", rating: 4.3, reviews: "6,543", source: "Amazon", link: "https://www.amazon.in/s?k=vivo+v30+pro" },
+    { name: "Vivo X100", image: "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?w=300&h=300&fit=crop", price: "₹63,999", rating: 4.5, reviews: "4,321", source: "Flipkart", link: "https://www.flipkart.com/search?q=vivo+x100" },
+    { name: "Vivo T3 5G", image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=300&h=300&fit=crop", price: "₹18,999", rating: 4.1, reviews: "7,654", source: "Amazon", link: "https://www.amazon.in/s?k=vivo+t3" },
+    { name: "Vivo Y28", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop", price: "₹13,999", rating: 3.9, reviews: "5,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=vivo+y28" }
+  ],
+  
+  // OPPO PHONES
+  'oppo phone': [
+    { name: "OPPO Reno 12 Pro", image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=300&h=300&fit=crop", price: "₹36,999", rating: 4.2, reviews: "5,876", source: "Amazon", link: "https://www.amazon.in/s?k=oppo+reno+12+pro" },
+    { name: "OPPO Find X7", image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=300&h=300&fit=crop", price: "₹69,999", rating: 4.4, reviews: "3,654", source: "Flipkart", link: "https://www.flipkart.com/search?q=oppo+find+x7" },
+    { name: "OPPO A3 Pro", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&h=300&fit=crop", price: "₹17,999", rating: 4.0, reviews: "6,789", source: "Amazon", link: "https://www.amazon.in/s?k=oppo+a3+pro" },
+    { name: "OPPO A18", image: "https://images.unsplash.com/photo-1587739172849-75d9bae21792?w=300&h=300&fit=crop", price: "₹9,999", rating: 3.8, reviews: "4,321", source: "Flipkart", link: "https://www.flipkart.com/search?q=oppo+a18" }
+  ],
+  'oppo': [
+    { name: "OPPO Reno 12 Pro", image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=300&h=300&fit=crop", price: "₹36,999", rating: 4.2, reviews: "5,876", source: "Amazon", link: "https://www.amazon.in/s?k=oppo+reno+12+pro" },
+    { name: "OPPO Find X7", image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=300&h=300&fit=crop", price: "₹69,999", rating: 4.4, reviews: "3,654", source: "Flipkart", link: "https://www.flipkart.com/search?q=oppo+find+x7" },
+    { name: "OPPO A3 Pro", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&h=300&fit=crop", price: "₹17,999", rating: 4.0, reviews: "6,789", source: "Amazon", link: "https://www.amazon.in/s?k=oppo+a3+pro" },
+    { name: "OPPO A18", image: "https://images.unsplash.com/photo-1587739172849-75d9bae21792?w=300&h=300&fit=crop", price: "₹9,999", rating: 3.8, reviews: "4,321", source: "Flipkart", link: "https://www.flipkart.com/search?q=oppo+a18" }
   ],
   'mobile': [
-    { name: "iPhone 15", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹74,999", rating: 4.5, reviews: "12,340", source: "Amazon", link: "https://amazon.in/iphone-15" },
-    { name: "Samsung Galaxy S24", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹71,999", rating: 4.2, reviews: "7,543", source: "Flipkart", link: "https://flipkart.com/samsung-s24" },
-    { name: "OnePlus 12 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹62,999", rating: 4.3, reviews: "4,876", source: "Amazon", link: "https://amazon.in/oneplus-12" },
-    { name: "Xiaomi 14 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.1, reviews: "5,432", source: "Flipkart", link: "https://flipkart.com/xiaomi-14" }
+    { name: "iPhone 15", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹74,999", rating: 4.5, reviews: "12,340", source: "Amazon", link: "https://www.amazon.in/s?k=iphone+15" },
+    { name: "Samsung Galaxy S24", image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&h=300&fit=crop", price: "₹71,999", rating: 4.2, reviews: "7,543", source: "Flipkart", link: "https://www.flipkart.com/search?q=samsung+galaxy+s24" },
+    { name: "OnePlus 12 5G", image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=300&fit=crop", price: "₹62,999", rating: 4.3, reviews: "4,876", source: "Amazon", link: "https://www.amazon.in/s?k=oneplus+12" },
+    { name: "Xiaomi 14 5G", image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.1, reviews: "5,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=xiaomi+14" }
   ],
   'smartphone': [
-    { name: "iPhone 15 Pro", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹1,34,900", rating: 4.6, reviews: "5,234", source: "Amazon", link: "https://amazon.in/iphone-15-pro" },
-    { name: "Samsung Galaxy S24 Ultra", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹1,29,999", rating: 4.4, reviews: "3,876", source: "Flipkart", link: "https://flipkart.com/samsung-s24-ultra" },
-    { name: "iPhone 14", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹63,999", rating: 4.3, reviews: "15,432", source: "Amazon", link: "https://amazon.in/iphone-14" },
-    { name: "OnePlus 11 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.2, reviews: "7,432", source: "Flipkart", link: "https://flipkart.com/oneplus-11" }
+    { name: "iPhone 15 Pro", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹1,34,900", rating: 4.6, reviews: "5,234", source: "Amazon", link: "https://www.amazon.in/s?k=iphone+15+pro" },
+    { name: "Samsung Galaxy S24 Ultra", image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&h=300&fit=crop", price: "₹1,29,999", rating: 4.4, reviews: "3,876", source: "Flipkart", link: "https://www.flipkart.com/search?q=samsung+galaxy+s24+ultra" },
+    { name: "iPhone 14", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=300&fit=crop", price: "₹63,999", rating: 4.3, reviews: "15,432", source: "Amazon", link: "https://www.amazon.in/s?k=iphone+14" },
+    { name: "OnePlus 11 5G", image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&h=300&fit=crop", price: "₹52,999", rating: 4.2, reviews: "7,432", source: "Flipkart", link: "https://www.flipkart.com/search?q=oneplus+11" }
   ],
   // Additional phone variants for comprehensive search
   'mobile phone': [
-    { name: "iPhone 13", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹53,999", rating: 4.2, reviews: "22,543", source: "Amazon", link: "https://amazon.in/iphone-13" },
-    { name: "Samsung Galaxy A54", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹35,999", rating: 4.1, reviews: "8,765", source: "Flipkart", link: "https://flipkart.com/samsung-a54" },
-    { name: "Redmi Note 13 Pro", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹23,999", rating: 4.0, reviews: "10,876", source: "Amazon", link: "https://amazon.in/redmi-note-13" },
-    { name: "OPPO F25 Pro 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹22,999", rating: 3.9, reviews: "2,876", source: "Flipkart", link: "https://flipkart.com/oppo-f25" }
+    { name: "iPhone 13", image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop", price: "₹53,999", rating: 4.2, reviews: "22,543", source: "Amazon", link: "https://www.amazon.in/s?k=iphone+13" },
+    { name: "Samsung Galaxy A54", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹35,999", rating: 4.1, reviews: "8,765", source: "Flipkart", link: "https://www.flipkart.com/search?q=samsung+galaxy+a54" },
+    { name: "Redmi Note 13 Pro", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹23,999", rating: 4.0, reviews: "10,876", source: "Amazon", link: "https://www.amazon.in/s?k=redmi+note+13+pro" },
+    { name: "OPPO F25 Pro 5G", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹22,999", rating: 3.9, reviews: "2,876", source: "Flipkart", link: "https://www.flipkart.com/search?q=oppo+f25+pro" }
   ],
   'phones': [
-    { name: "Vivo V30 Pro", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹40,999", rating: 4.0, reviews: "3,876", source: "Amazon", link: "https://amazon.in/vivo-v30" },
-    { name: "Realme 12 Pro+", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹28,999", rating: 3.9, reviews: "4,765", source: "Flipkart", link: "https://flipkart.com/realme-12" },
-    { name: "Google Pixel 8", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹75,999", rating: 4.4, reviews: "1,234", source: "Amazon", link: "https://amazon.in/pixel-8" },
-    { name: "Nothing Phone 2", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&h=300&fit=crop", price: "₹44,999", rating: 4.2, reviews: "987", source: "Flipkart", link: "https://flipkart.com/nothing-phone-2" }
+    { name: "Vivo V30 Pro", image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=300&h=300&fit=crop", price: "₹40,999", rating: 4.0, reviews: "3,876", source: "Amazon", link: "https://www.amazon.in/s?k=vivo+v30+pro" },
+    { name: "Realme 12 Pro+", image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=300&h=300&fit=crop", price: "₹28,999", rating: 3.9, reviews: "4,765", source: "Flipkart", link: "https://www.flipkart.com/search?q=realme+12+pro" },
+    { name: "Google Pixel 8", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=300&fit=crop", price: "₹75,999", rating: 4.4, reviews: "1,234", source: "Amazon", link: "https://www.amazon.in/s?k=google+pixel+8" },
+    { name: "Nothing Phone 2", image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=300&h=300&fit=crop", price: "₹44,999", rating: 4.2, reviews: "987", source: "Flipkart", link: "https://www.flipkart.com/search?q=nothing+phone+2" }
   ],
   'headphones': [
     {
@@ -309,7 +365,7 @@ const mockProducts = {
       rating: 4.6,
       reviews: "8,234",
       source: "Amazon",
-      link: "https://amazon.in/sony-wh1000xm5"
+      link: "https://www.amazon.in/s?k=sony+wh-1000xm5"
     },
     {
       name: "JBL Tune 760NC",
@@ -318,7 +374,7 @@ const mockProducts = {
       rating: 4.2,
       reviews: "3,456",
       source: "Flipkart",
-      link: "https://flipkart.com/jbl-tune-760nc"
+      link: "https://www.flipkart.com/search?q=jbl+tune+760nc"
     }
   ],
   'watch': [
@@ -329,7 +385,7 @@ const mockProducts = {
       rating: 4.7,
       reviews: "12,345",
       source: "Amazon",
-      link: "https://amazon.in/apple-watch-series-9"
+      link: "https://www.amazon.in/s?k=apple+watch+series+9"
     },
     {
       name: "Samsung Galaxy Watch 6",
@@ -338,7 +394,7 @@ const mockProducts = {
       rating: 4.4,
       reviews: "8,976",
       source: "Flipkart",
-      link: "https://flipkart.com/samsung-galaxy-watch-6"
+      link: "https://www.flipkart.com/search?q=samsung+galaxy+watch+6"
     }
   ],
   'tv': [
@@ -349,7 +405,7 @@ const mockProducts = {
       rating: 4.3,
       reviews: "7,654",
       source: "Amazon",
-      link: "https://amazon.in/samsung-55-4k-tv"
+      link: "https://www.amazon.in/s?k=samsung+55+4k+smart+tv"
     },
     {
       name: "LG 55\" OLED TV",
@@ -358,7 +414,7 @@ const mockProducts = {
       rating: 4.6,
       reviews: "5,432",
       source: "Flipkart",
-      link: "https://flipkart.com/lg-55-oled-tv"
+      link: "https://www.flipkart.com/search?q=lg+55+oled+tv"
     }
   ],
   'nike shoes': [
@@ -369,7 +425,7 @@ const mockProducts = {
       rating: 4.5,
       reviews: "12,456",
       source: "Amazon",
-      link: "https://amazon.in/nike-air-force-1"
+      link: "https://www.amazon.in/s?k=nike+air+force+1"
     },
     {
       name: "Nike Revolution 6",
@@ -378,7 +434,7 @@ const mockProducts = {
       rating: 4.3,
       reviews: "8,765",
       source: "Flipkart",
-      link: "https://flipkart.com/nike-revolution-6"
+      link: "https://www.flipkart.com/search?q=nike+revolution+6"
     }
   ],
   
@@ -438,7 +494,7 @@ const mockProducts = {
 
 // Universal product categories for intelligent matching
 const productCategories = {
-  electronics: ['phone', 'mobile', 'smartphone', 'iphone', 'samsung', 'oneplus', 'xiaomi', 'laptop', 'computer', 'tablet', 'ipad'],
+  electronics: ['phone', 'mobile', 'smartphone', 'iphone', 'samsung', 'oneplus', 'xiaomi', 'poco', 'realme', 'vivo', 'oppo', 'laptop', 'computer', 'tablet', 'ipad'],
   fashion: ['shoes', 'sneakers', 'shirt', 'tshirt', 'jeans', 'dress', 'jacket', 'watch', 'belt', 'clothing'],
   home: ['television', 'tv', 'refrigerator', 'fridge', 'washing machine', 'microwave', 'ac', 'fan', 'rice cooker', 'mixer'],
   groceries: ['rice', 'oil', 'flour', 'sugar', 'tea', 'coffee', 'snacks', 'biscuits'],
@@ -514,7 +570,7 @@ const generateProductResults = (query) => {
   
   // Comprehensive category detection
   const categoryKeywords = {
-    electronics: ['phone', 'mobile', 'smartphone', 'laptop', 'computer', 'tablet', 'tv', 'television', 'camera', 'speaker', 'earphones', 'headphones', 'charger', 'cable', 'mouse', 'keyboard', 'monitor', 'printer', 'router', 'modem'],
+    electronics: ['phone', 'mobile', 'smartphone', 'laptop', 'computer', 'tablet', 'tv', 'television', 'camera', 'speaker', 'earphones', 'headphones', 'charger', 'cable', 'mouse', 'keyboard', 'monitor', 'printer', 'router', 'modem', 'poco', 'realme', 'vivo', 'oppo', 'iphone', 'samsung', 'oneplus', 'xiaomi'],
     fashion: ['shirt', 'tshirt', 't-shirt', 'jeans', 'pants', 'dress', 'skirt', 'jacket', 'coat', 'sweater', 'hoodie', 'shorts', 'top', 'blouse', 'suit', 'tie', 'belt', 'bag', 'purse', 'wallet', 'sunglasses', 'hat', 'cap'],
     footwear: ['shoes', 'sneakers', 'boots', 'sandals', 'slippers', 'heels', 'flats', 'sports shoes', 'formal shoes', 'casual shoes'],
     home: ['sofa', 'chair', 'table', 'bed', 'mattress', 'pillow', 'blanket', 'curtain', 'lamp', 'fan', 'ac', 'heater', 'cooler', 'refrigerator', 'fridge', 'microwave', 'oven', 'mixer', 'grinder', 'iron', 'vacuum'],
@@ -618,7 +674,7 @@ const generateProductResults = (query) => {
       rating: (4.2 + Math.random() * 0.8).toFixed(1),
       reviews: `${Math.floor(Math.random() * 15000) + 5000}`,
       source: "Amazon",
-      link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+      link: `https://www.amazon.in/s?k=${encodeURIComponent(query)}`
     },
     {
       name: `${productType} - Best Seller`,
@@ -627,7 +683,7 @@ const generateProductResults = (query) => {
       rating: (3.9 + Math.random() * 0.9).toFixed(1),
       reviews: `${Math.floor(Math.random() * 12000) + 3000}`,
       source: "Flipkart",
-      link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
+      link: `https://www.flipkart.com/search?q=${encodeURIComponent(query)}`
     },
     {
       name: `${productType} - Budget Option`,
@@ -636,7 +692,7 @@ const generateProductResults = (query) => {
       rating: (3.5 + Math.random() * 1).toFixed(1),
       reviews: `${Math.floor(Math.random() * 8000) + 1500}`,
       source: "Amazon",
-      link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+      link: `https://www.amazon.in/s?k=${encodeURIComponent(query)}`
     }
   ];
 };
@@ -729,7 +785,7 @@ app.get('/api/search', (req, res) => {
           rating: (3.5 + Math.random() * 1.5).toFixed(1),
           reviews: `${Math.floor(Math.random() * 5000) + 1000}`,
           source: "Amazon",
-          link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+          link: `https://www.amazon.in/s?k=${encodeURIComponent(query)}`
         },
         {
           name: `${query} - Best Price`,
@@ -738,7 +794,7 @@ app.get('/api/search', (req, res) => {
           rating: (3.8 + Math.random() * 1.2).toFixed(1),
           reviews: `${Math.floor(Math.random() * 3000) + 500}`,
           source: "Flipkart",
-          link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
+          link: `https://www.flipkart.com/search?q=${encodeURIComponent(query)}`
         }
       ];
     }
