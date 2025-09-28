@@ -335,91 +335,219 @@ const productCategories = {
 const generateProductResults = (query) => {
   const searchTerm = query.toLowerCase().trim();
   
+  // Enhanced brand detection with comprehensive coverage
+  const brandMap = {
+    'bata': { category: 'shoes', basePrice: 1500, image: 'shoe' },
+    'nike': { category: 'shoes', basePrice: 5000, image: 'shoe' },
+    'adidas': { category: 'shoes', basePrice: 4500, image: 'shoe' },
+    'puma': { category: 'shoes', basePrice: 3500, image: 'shoe' },
+    'apple': { category: 'electronics', basePrice: 50000, image: 'tech' },
+    'samsung': { category: 'electronics', basePrice: 40000, image: 'tech' },
+    'sony': { category: 'electronics', basePrice: 15000, image: 'tech' },
+    'lg': { category: 'electronics', basePrice: 25000, image: 'tech' },
+    'dell': { category: 'electronics', basePrice: 45000, image: 'tech' },
+    'hp': { category: 'electronics', basePrice: 35000, image: 'tech' },
+    'lenovo': { category: 'electronics', basePrice: 30000, image: 'tech' },
+    'oneplus': { category: 'electronics', basePrice: 35000, image: 'tech' },
+    'xiaomi': { category: 'electronics', basePrice: 20000, image: 'tech' },
+    'oppo': { category: 'electronics', basePrice: 25000, image: 'tech' },
+    'vivo': { category: 'electronics', basePrice: 22000, image: 'tech' },
+    'realme': { category: 'electronics', basePrice: 18000, image: 'tech' }
+  };
+  
   // Check for specific brands first
-  if (searchTerm.includes('bata')) {
-    return [
-      {
-        name: `Bata ${query.replace(/bata/gi, '').trim() || 'Shoes'}`,
-        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop",
-        price: `₹${Math.floor(Math.random() * 2000) + 1000}`,
-        rating: (3.8 + Math.random() * 1).toFixed(1),
-        reviews: `${Math.floor(Math.random() * 8000) + 2000}`,
-        source: "Amazon",
-        link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
-      },
-      {
-        name: `Bata ${query.replace(/bata/gi, '').trim() || 'Shoes'} - Style 2`,
-        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop",
-        price: `₹${Math.floor(Math.random() * 1800) + 800}`,
-        rating: (3.7 + Math.random() * 1).toFixed(1),
-        reviews: `${Math.floor(Math.random() * 6000) + 1500}`,
-        source: "Flipkart",
-        link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
-      }
-    ];
+  for (const [brand, config] of Object.entries(brandMap)) {
+    if (searchTerm.includes(brand)) {
+      return [
+        {
+          name: `${brand.charAt(0).toUpperCase() + brand.slice(1)} ${query.replace(new RegExp(brand, 'gi'), '').trim() || 'Product'} - Premium`,
+          image: getImageForCategory(config.category),
+          price: `₹${(config.basePrice * 1.3).toLocaleString('en-IN')}`,
+          rating: (4.2 + Math.random() * 0.8).toFixed(1),
+          reviews: `${Math.floor(Math.random() * 15000) + 5000}`,
+          source: "Amazon",
+          link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+        },
+        {
+          name: `${brand.charAt(0).toUpperCase() + brand.slice(1)} ${query.replace(new RegExp(brand, 'gi'), '').trim() || 'Product'} - Standard`,
+          image: getImageForCategory(config.category),
+          price: `₹${config.basePrice.toLocaleString('en-IN')}`,
+          rating: (3.9 + Math.random() * 0.8).toFixed(1),
+          reviews: `${Math.floor(Math.random() * 12000) + 3000}`,
+          source: "Flipkart",
+          link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
+        },
+        {
+          name: `${brand.charAt(0).toUpperCase() + brand.slice(1)} ${query.replace(new RegExp(brand, 'gi'), '').trim() || 'Product'} - Budget`,
+          image: getImageForCategory(config.category),
+          price: `₹${(config.basePrice * 0.7).toLocaleString('en-IN')}`,
+          rating: (3.6 + Math.random() * 0.8).toFixed(1),
+          reviews: `${Math.floor(Math.random() * 8000) + 2000}`,
+          source: "Amazon",
+          link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+        }
+      ];
+    }
   }
   
-  // Determine product category and pricing
+  // Determine product category and pricing based on keywords
   let category = 'general';
   let basePrice = 1000;
+  let productType = query;
   
-  for (const [cat, keywords] of Object.entries(productCategories)) {
-    if (keywords.some(keyword => searchTerm.includes(keyword))) {
+  // Comprehensive category detection
+  const categoryKeywords = {
+    electronics: ['phone', 'mobile', 'smartphone', 'laptop', 'computer', 'tablet', 'tv', 'television', 'camera', 'speaker', 'earphones', 'headphones', 'charger', 'cable', 'mouse', 'keyboard', 'monitor', 'printer', 'router', 'modem'],
+    fashion: ['shirt', 'tshirt', 't-shirt', 'jeans', 'pants', 'dress', 'skirt', 'jacket', 'coat', 'sweater', 'hoodie', 'shorts', 'top', 'blouse', 'suit', 'tie', 'belt', 'bag', 'purse', 'wallet', 'sunglasses', 'hat', 'cap'],
+    footwear: ['shoes', 'sneakers', 'boots', 'sandals', 'slippers', 'heels', 'flats', 'sports shoes', 'formal shoes', 'casual shoes'],
+    home: ['sofa', 'chair', 'table', 'bed', 'mattress', 'pillow', 'blanket', 'curtain', 'lamp', 'fan', 'ac', 'heater', 'cooler', 'refrigerator', 'fridge', 'microwave', 'oven', 'mixer', 'grinder', 'iron', 'vacuum'],
+    kitchen: ['pot', 'pan', 'plate', 'bowl', 'spoon', 'fork', 'knife', 'cup', 'glass', 'bottle', 'jar', 'container', 'cooker', 'kettle', 'toaster', 'blender'],
+    groceries: ['rice', 'wheat', 'flour', 'oil', 'sugar', 'salt', 'tea', 'coffee', 'milk', 'bread', 'biscuit', 'snacks', 'chocolate', 'candy', 'juice', 'water', 'dal', 'pulses', 'spices'],
+    beauty: ['shampoo', 'soap', 'cream', 'lotion', 'perfume', 'cologne', 'lipstick', 'foundation', 'powder', 'mascara', 'nail polish', 'hair oil', 'face wash', 'moisturizer', 'sunscreen'],
+    sports: ['cricket', 'football', 'basketball', 'tennis', 'badminton', 'volleyball', 'hockey', 'bat', 'ball', 'racket', 'gloves', 'helmet', 'pads', 'jersey', 'shoes', 'dumbbells', 'weights', 'yoga', 'fitness'],
+    books: ['book', 'novel', 'textbook', 'magazine', 'comic', 'diary', 'notebook', 'pen', 'pencil', 'eraser', 'ruler', 'calculator'],
+    automotive: ['car', 'bike', 'motorcycle', 'scooter', 'helmet', 'tire', 'battery', 'oil', 'polish', 'cover', 'accessories'],
+    toys: ['toy', 'doll', 'game', 'puzzle', 'lego', 'car toy', 'action figure', 'teddy bear', 'board game', 'video game'],
+    health: ['medicine', 'tablet', 'syrup', 'capsule', 'vitamin', 'supplement', 'thermometer', 'bandage', 'mask', 'sanitizer'],
+    baby: ['diaper', 'baby food', 'bottle', 'toy', 'clothes', 'crib', 'stroller', 'car seat', 'baby oil', 'powder'],
+    pets: ['dog food', 'cat food', 'pet toy', 'collar', 'leash', 'cage', 'bed', 'brush', 'shampoo'],
+    garden: ['plant', 'seed', 'pot', 'soil', 'fertilizer', 'tool', 'hose', 'sprinkler', 'flower', 'vegetable']
+  };
+  
+  // Find matching category
+  for (const [cat, keywords] of Object.entries(categoryKeywords)) {
+    if (keywords.some(keyword => searchTerm.includes(keyword) || keyword.includes(searchTerm))) {
       category = cat;
       break;
     }
   }
   
-  // Set category-specific pricing
+  // Set category-specific pricing and product names
   switch (category) {
     case 'electronics':
-      basePrice = Math.floor(Math.random() * 50000) + 10000;
+      basePrice = Math.floor(Math.random() * 80000) + 10000;
+      productType = searchTerm.includes('phone') || searchTerm.includes('mobile') ? 'Smartphone' : 
+                   searchTerm.includes('laptop') || searchTerm.includes('computer') ? 'Laptop' :
+                   searchTerm.includes('tv') || searchTerm.includes('television') ? 'Smart TV' :
+                   `${query} Electronics`;
       break;
     case 'fashion':
-      basePrice = Math.floor(Math.random() * 5000) + 500;
+      basePrice = Math.floor(Math.random() * 8000) + 500;
+      productType = `${query} Fashion`;
+      break;
+    case 'footwear':
+      basePrice = Math.floor(Math.random() * 12000) + 800;
+      productType = `${query} Footwear`;
       break;
     case 'home':
-      basePrice = Math.floor(Math.random() * 30000) + 2000;
+      basePrice = Math.floor(Math.random() * 50000) + 2000;
+      productType = `${query} Home Appliance`;
+      break;
+    case 'kitchen':
+      basePrice = Math.floor(Math.random() * 15000) + 500;
+      productType = `${query} Kitchen Item`;
       break;
     case 'groceries':
-      basePrice = Math.floor(Math.random() * 500) + 100;
+      basePrice = Math.floor(Math.random() * 2000) + 100;
+      productType = `${query} Grocery`;
       break;
     case 'beauty':
-      basePrice = Math.floor(Math.random() * 2000) + 200;
+      basePrice = Math.floor(Math.random() * 5000) + 200;
+      productType = `${query} Beauty Product`;
+      break;
+    case 'sports':
+      basePrice = Math.floor(Math.random() * 20000) + 500;
+      productType = `${query} Sports Equipment`;
+      break;
+    case 'books':
+      basePrice = Math.floor(Math.random() * 1500) + 100;
+      productType = `${query} Book/Stationery`;
+      break;
+    case 'automotive':
+      basePrice = Math.floor(Math.random() * 30000) + 1000;
+      productType = `${query} Auto Accessory`;
+      break;
+    case 'toys':
+      basePrice = Math.floor(Math.random() * 5000) + 200;
+      productType = `${query} Toy`;
+      break;
+    case 'health':
+      basePrice = Math.floor(Math.random() * 3000) + 100;
+      productType = `${query} Health Product`;
+      break;
+    case 'baby':
+      basePrice = Math.floor(Math.random() * 8000) + 300;
+      productType = `${query} Baby Product`;
+      break;
+    case 'pets':
+      basePrice = Math.floor(Math.random() * 4000) + 200;
+      productType = `${query} Pet Product`;
+      break;
+    case 'garden':
+      basePrice = Math.floor(Math.random() * 3000) + 150;
+      productType = `${query} Garden Item`;
       break;
     default:
       basePrice = Math.floor(Math.random() * 10000) + 500;
+      productType = `${query} Product`;
   }
   
+  // Generate 3 product variants with realistic data
   return [
     {
-      name: `${query} - Premium Quality`,
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop&q=80",
-      price: `₹${(basePrice * 1.3).toLocaleString('en-IN')}`,
-      rating: (4.0 + Math.random() * 1).toFixed(1),
-      reviews: `${Math.floor(Math.random() * 10000) + 1000}`,
+      name: `${productType} - Premium Quality`,
+      image: getImageForCategory(category),
+      price: `₹${(basePrice * 1.4).toLocaleString('en-IN')}`,
+      rating: (4.2 + Math.random() * 0.8).toFixed(1),
+      reviews: `${Math.floor(Math.random() * 15000) + 5000}`,
       source: "Amazon",
       link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
     },
     {
-      name: `${query} - Best Seller`,
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop&q=80",
+      name: `${productType} - Best Seller`,
+      image: getImageForCategory(category),
       price: `₹${basePrice.toLocaleString('en-IN')}`,
-      rating: (3.8 + Math.random() * 1).toFixed(1),
-      reviews: `${Math.floor(Math.random() * 8000) + 500}`,
+      rating: (3.9 + Math.random() * 0.9).toFixed(1),
+      reviews: `${Math.floor(Math.random() * 12000) + 3000}`,
       source: "Flipkart",
       link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
     },
     {
-      name: `${query} - Budget Option`,
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop&q=80",
-      price: `₹${(basePrice * 0.7).toLocaleString('en-IN')}`,
+      name: `${productType} - Budget Option`,
+      image: getImageForCategory(category),
+      price: `₹${(basePrice * 0.6).toLocaleString('en-IN')}`,
       rating: (3.5 + Math.random() * 1).toFixed(1),
-      reviews: `${Math.floor(Math.random() * 5000) + 200}`,
+      reviews: `${Math.floor(Math.random() * 8000) + 1500}`,
       source: "Amazon",
       link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
     }
   ];
+};
+
+// Helper function to get appropriate images for categories
+const getImageForCategory = (category) => {
+  const imageMap = {
+    electronics: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=300&h=300&fit=crop",
+    fashion: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop",
+    footwear: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+    shoe: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+    home: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&h=300&fit=crop",
+    kitchen: "https://images.unsplash.com/photo-1556909114-4516729c4ebe?w=300&h=300&fit=crop",
+    groceries: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&h=300&fit=crop",
+    beauty: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop",
+    sports: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop",
+    books: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop",
+    automotive: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=300&fit=crop",
+    toys: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=300&h=300&fit=crop",
+    health: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&h=300&fit=crop",
+    baby: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=300&h=300&fit=crop",
+    pets: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=300&fit=crop",
+    garden: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=300&fit=crop",
+    tech: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=300&h=300&fit=crop",
+    general: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop"
+  };
+  
+  return imageMap[category] || imageMap.general;
 };
 
 // API Routes
@@ -469,8 +597,33 @@ app.get('/api/search', (req, res) => {
     }
     
     // Priority 2: Generate intelligent results for any product
+    // Priority 4: Generate intelligent results for ANY search (GUARANTEED RESULTS)
     if (results.length === 0) {
       results = generateProductResults(query);
+    }
+    
+    // FAIL-SAFE: If somehow still no results, create basic results (THIS SHOULD NEVER HAPPEN)
+    if (results.length === 0) {
+      results = [
+        {
+          name: `${query} - Available Online`,
+          image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop",
+          price: `₹${Math.floor(Math.random() * 5000) + 500}`,
+          rating: (3.5 + Math.random() * 1.5).toFixed(1),
+          reviews: `${Math.floor(Math.random() * 5000) + 1000}`,
+          source: "Amazon",
+          link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+        },
+        {
+          name: `${query} - Best Price`,
+          image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop",
+          price: `₹${Math.floor(Math.random() * 4000) + 300}`,
+          rating: (3.8 + Math.random() * 1.2).toFixed(1),
+          reviews: `${Math.floor(Math.random() * 3000) + 500}`,
+          source: "Flipkart",
+          link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
+        }
+      ];
     }
     
     // Sort by price (lowest first)
