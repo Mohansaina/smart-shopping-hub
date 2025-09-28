@@ -4,7 +4,7 @@ build:
     - cd server && npm install
 services:
   - type: web
-    name: smart-product-comparator-api
+    name: smart-shopping-hub-api
     env: node
     plan: free
     buildCommand: cd server && npm install
