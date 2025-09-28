@@ -132,6 +132,75 @@ const mockProducts = {
       link: "https://flipkart.com/adidas-ultraboost"
     }
   ],
+  'bata shoes': [
+    {
+      name: "Bata Men's Formal Shoes",
+      image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop",
+      price: "₹2,499",
+      rating: 4.1,
+      reviews: "8,234",
+      source: "Amazon",
+      link: "https://amazon.in/bata-formal-shoes"
+    },
+    {
+      name: "Bata Women's Casual Shoes",
+      image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop",
+      price: "₹1,999",
+      rating: 4.0,
+      reviews: "6,789",
+      source: "Flipkart",
+      link: "https://flipkart.com/bata-casual-shoes"
+    },
+    {
+      name: "Bata School Shoes",
+      image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop",
+      price: "₹1,299",
+      rating: 4.2,
+      reviews: "9,876",
+      source: "Amazon",
+      link: "https://amazon.in/bata-school-shoes"
+    }
+  ],
+  'nike shoes': [
+    {
+      name: "Nike Air Force 1",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+      price: "₹7,495",
+      rating: 4.5,
+      reviews: "12,456",
+      source: "Amazon",
+      link: "https://amazon.in/nike-air-force-1"
+    },
+    {
+      name: "Nike Revolution 6",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+      price: "₹3,495",
+      rating: 4.3,
+      reviews: "8,765",
+      source: "Flipkart",
+      link: "https://flipkart.com/nike-revolution-6"
+    }
+  ],
+  'adidas shoes': [
+    {
+      name: "Adidas Stan Smith",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+      price: "₹6,999",
+      rating: 4.4,
+      reviews: "7,890",
+      source: "Amazon",
+      link: "https://amazon.in/adidas-stan-smith"
+    },
+    {
+      name: "Adidas Superstar",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+      price: "₹7,999",
+      rating: 4.6,
+      reviews: "9,234",
+      source: "Flipkart",
+      link: "https://flipkart.com/adidas-superstar"
+    }
+  ],
   'watch': [
     {
       name: "Apple Watch Series 9",
@@ -253,6 +322,53 @@ const productCategories = {
 const generateProductResults = (query) => {
   const searchTerm = query.toLowerCase().trim();
   
+  // Check for specific brands first
+  if (searchTerm.includes('bata')) {
+    return [
+      {
+        name: `Bata ${query.replace(/bata/gi, '').trim() || 'Shoes'}`,
+        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop",
+        price: `₹${Math.floor(Math.random() * 2000) + 1000}`,
+        rating: (3.8 + Math.random() * 1).toFixed(1),
+        reviews: `${Math.floor(Math.random() * 8000) + 2000}`,
+        source: "Amazon",
+        link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+      },
+      {
+        name: `Bata ${query.replace(/bata/gi, '').trim() || 'Shoes'} - Style 2`,
+        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=300&h=300&fit=crop",
+        price: `₹${Math.floor(Math.random() * 1800) + 800}`,
+        rating: (3.7 + Math.random() * 1).toFixed(1),
+        reviews: `${Math.floor(Math.random() * 6000) + 1500}`,
+        source: "Flipkart",
+        link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
+      }
+    ];
+  }
+  
+  if (searchTerm.includes('nike')) {
+    return [
+      {
+        name: `Nike ${query.replace(/nike/gi, '').trim() || 'Shoes'}`,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+        price: `₹${Math.floor(Math.random() * 8000) + 3000}`,
+        rating: (4.2 + Math.random() * 0.8).toFixed(1),
+        reviews: `${Math.floor(Math.random() * 12000) + 5000}`,
+        source: "Amazon",
+        link: `https://amazon.in/search?k=${encodeURIComponent(query)}`
+      },
+      {
+        name: `Nike ${query.replace(/nike/gi, '').trim() || 'Shoes'} - Pro`,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
+        price: `₹${Math.floor(Math.random() * 10000) + 4000}`,
+        rating: (4.3 + Math.random() * 0.7).toFixed(1),
+        reviews: `${Math.floor(Math.random() * 10000) + 4000}`,
+        source: "Flipkart",
+        link: `https://flipkart.com/search?q=${encodeURIComponent(query)}`
+      }
+    ];
+  }
+  
   // Determine product category
   let category = 'general';
   let basePrice = 1000;
@@ -340,12 +456,30 @@ app.get('/api/search', (req, res) => {
     // Find matching products
     let results = [];
     
-    // Check if query matches any of our specific mock data keys
-    for (const [key, products] of Object.entries(mockProducts)) {
-      if (key.includes(searchKey) || searchKey.includes(key) || 
-          key.split(' ').some(word => searchKey.includes(word))) {
-        results = [...results, ...products];
-        break;
+    // Priority 1: Check for exact brand + product matches first
+    const exactMatches = [
+      'bata shoes', 'nike shoes', 'adidas shoes', 'puma shoes',
+      'iphone 15', 'samsung galaxy s24', 'oneplus 11',
+      'sony headphones', 'bose headphones', 'jbl headphones'
+    ];
+    
+    for (const exactMatch of exactMatches) {
+      if (searchKey.includes(exactMatch) || exactMatch.includes(searchKey)) {
+        if (mockProducts[exactMatch]) {
+          results = [...mockProducts[exactMatch]];
+          break;
+        }
+      }
+    }
+    
+    // Priority 2: Check if query matches any of our specific mock data keys
+    if (results.length === 0) {
+      for (const [key, products] of Object.entries(mockProducts)) {
+        if (key.includes(searchKey) || searchKey.includes(key) || 
+            key.split(' ').some(word => searchKey.includes(word))) {
+          results = [...results, ...products];
+          break;
+        }
       }
     }
     
